@@ -1,0 +1,11 @@
+node_modules/
+lib/
+*.tsbuildinfo
+*.tgz
+/harness
+.env
+.env.*
+!.env.example
+.DS_Store
+coverage/
+*.log

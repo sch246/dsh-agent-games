@@ -1,0 +1,76 @@
+{
+  "name": "@dsh-external/dsh-agent-games",
+  "version": "0.5.0",
+  "description": "Markdown game catalog with model CRUD and an official Web settings card.",
+  "private": true,
+  "type": "module",
+  "main": "./lib/index.js",
+  "types": "./lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./types": {
+      "types": "./lib/types/types.d.ts",
+      "default": "./lib/types/types.js"
+    },
+    "./client": {
+      "types": "./lib/types/client/index.d.ts",
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/client.js",
+    "lib/types/**/*.js",
+    "lib/types/**/*.d.ts",
+    "games"
+  ],
+  "license": "BSD-3-Clause",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sch246/dsh-agent-games.git"
+  },
+  "homepage": "https://github.com/sch246/dsh-agent-games#readme",
+  "bugs": "https://github.com/sch246/dsh-agent-games/issues",
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-api-remotes",
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-ui-settings-plugins",
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "@deepseek-ai/dsh-client-locale"
+      ]
+    }
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "@deepseek-ai/cordis": ">=4.0.0-rc <5",
+    "@deepseek-ai/dsh-api-remotes": ">=0.0.1-rc <2",
+    "@deepseek-ai/dsh-atomic-write": ">=0.1.1-rc <2",
+    "@deepseek-ai/dsh-client-connection": ">=0.0.1-rc <2",
+    "@deepseek-ai/dsh-client-locale": ">=0.0.1-rc <2",
+    "@deepseek-ai/dsh-client-runtime": ">=0.0.1-rc <2",
+    "@deepseek-ai/dsh-client-ui-primitives": ">=0.0.1-rc <2",
+    "@deepseek-ai/dsh-client-ui-settings-plugins": ">=0.0.1-rc <2",
+    "@deepseek-ai/dsh-settings": ">=0.0.1-rc <2",
+    "@deepseek-ai/dsh-tools": ">=0.0.1-rc <2",
+    "@deepseek-ai/schemastery": "^3.18.0",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.3",
+    "@types/react": "~18.3.1",
+    "typescript": "^5.9.0"
+  },
+  "scripts": {
+    "build": "bash scripts/build.sh",
+    "test": "bash scripts/build.sh && node --test tests/*.test.mjs",
+    "typecheck": "bash scripts/build.sh"
+  }
+}

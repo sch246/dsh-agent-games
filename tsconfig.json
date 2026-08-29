@@ -1,0 +1,17 @@
+{
+  "extends": "./harness/tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "lib/types",
+    "tsBuildInfoFile": "lib/types/tsconfig.tsbuildinfo"
+  },
+  "include": ["src/index.ts", "src/catalog.ts", "src/rpc.ts", "src/store.ts", "src/types.ts"],
+  "references": [
+    { "path": "./harness/vendor/cordis" },
+    { "path": "./harness/vendor/schemastery" },
+    { "path": "./harness/packages/util/atomic-write" },
+    { "path": "./harness/packages/core/tools" },
+    { "path": "./harness/packages/settings/settings" },
+    { "path": "./harness/packages/client/connection/tsconfig.host.json" }
+  ]
+}
