@@ -66,7 +66,7 @@ function failure(error: unknown) {
   }
 }
 
-/** Build the loopback-only game-management RPC handler. */
+/** Build the authenticated game-management RPC handler. */
 export function createAgentGamesRpcHandler(catalog: AgentGameCatalog): ConnectionRpcHandler {
   return async (endpoint, payload) => {
     try {

@@ -61,14 +61,13 @@ link_pkg @deepseek-ai/dsh-atomic-write packages/util/atomic-write
 link_pkg @deepseek-ai/dsh-tools packages/core/tools
 link_pkg @deepseek-ai/dsh-settings packages/settings/settings
 link_pkg @deepseek-ai/dsh-client-connection packages/client/connection
-link_pkg @deepseek-ai/dsh-host-apiproxy packages/host/apiproxy
 link_pkg @deepseek-ai/dsh-host-webserver packages/host/webserver
 link_pkg @deepseek-ai/dsh-brand packages/util/brand
 link_pkg @deepseek-ai/dsh-llm packages/llm/llm
 link_pkg @deepseek-ai/dsh-session packages/core/session
 link_pkg @deepseek-ai/dsh-api-remotes packages/api/remotes
-link_pkg @deepseek-ai/dsh-client-runtime packages/client/runtime
 link_pkg @deepseek-ai/dsh-client-locale packages/client/locale
+link_pkg @deepseek-ai/dsh-client-ui-renderer packages/client/ui-renderer
 link_pkg @deepseek-ai/dsh-client-ui-settings packages/client/ui-settings
 link_pkg @deepseek-ai/dsh-client-ui-settings-plugins packages/client/ui-settings-plugins
 link_pkg @deepseek-ai/dsh-client-ui-slots packages/client/ui-slots

@@ -2,17 +2,16 @@
 
 import { useCallback, useEffect, useMemo, useState, useSyncExternalStore, type ReactNode } from 'react'
 import type { PluginInventorySnapshot } from '@deepseek-ai/dsh-api-remotes/client'
-import type { SettingsScope } from '@deepseek-ai/dsh-client-runtime/client'
-import { MarkdownText, Modal } from '@deepseek-ai/dsh-client-ui-primitives'
+import { MarkdownText, Modal, type MarkdownLabels } from '@deepseek-ai/dsh-client-ui-primitives'
+import type { SettingsScope } from '@deepseek-ai/dsh-client-ui-settings/client'
 import type { InjectFace, PropsLocale, PropsRuntime } from '@deepseek-ai/dsh-client-ui-slots'
 import type {
   CreateGameRequest, GameDefinition, GameListResult, GameSummary, UpdateGameRequest,
 } from '@dsh-external/dsh-agent-games/types'
+import { hasGamesDirOverride, type AgentGamesSettings } from './settings.js'
 import css from './styles.js'
 
-export interface AgentGamesSettings {
-  gamesDir: string
-}
+export type { AgentGamesSettings } from './settings.js'
 
 /** Host and settings operations injected by the Client registration. */
 export interface AgentGamesCardInjected {
@@ -131,6 +130,7 @@ export function AgentGamesCard(props: AgentGamesCardProps): ReactNode {
   useEffect(() => { reload() }, [reload, request])
 
   const activeDirectory = settingsView.status === 'ready' ? settingsView.value?.gamesDir ?? '' : ''
+  const directoryOverridden = hasGamesDirOverride(settingsView.user)
   const directoryDirty = directoryDraft.trim() !== activeDirectory
   const saveDirectory = (): void => {
     const value = directoryDraft.trim()
@@ -230,6 +230,10 @@ export function AgentGamesCard(props: AgentGamesCardProps): ReactNode {
     [editor],
   )
   const missingEditorDependencies = editorDependencies.filter(value => dependencyReady(value, inventorySnapshot) === false)
+  const markdownLabels = useMemo<MarkdownLabels>(() => ({
+    code: { copyLabel: t('copyCode'), copiedLabel: t('copiedCode') },
+    footnotes: t('footnotes'),
+  }), [t])
 
   const renderEditor = (): ReactNode => {
     if (editorStatus === 'loading') return <p className={css.status}>{t('loading')}</p>
@@ -269,7 +273,7 @@ export function AgentGamesCard(props: AgentGamesCardProps): ReactNode {
             <textarea className={css.markdownEditor} value={editor.rules} onChange={event => { setEditor({ ...editor, rules: event.currentTarget.value }); setEditorStatus('idle') }} />
           </label>
         ) : (
-          <div className={css.preview} role="tabpanel"><MarkdownText text={editor.rules} /></div>
+          <div className={css.preview} role="tabpanel"><MarkdownText text={editor.rules} labels={markdownLabels} /></div>
         )}
         {editorStatus === 'error' ? <p className={css.error}>{t('saveError')} {t('requiredFields')}</p> : null}
         <div className={css.footer}>
@@ -312,7 +316,7 @@ export function AgentGamesCard(props: AgentGamesCardProps): ReactNode {
             </label>
             <div className={css.actions}>
               <button type="button" data-primary disabled={!directoryDirty || !settingsView.writable || directoryStatus === 'saving'} onClick={saveDirectory}>{t('saveDirectory')}</button>
-              <button type="button" disabled={!settingsView.writable || directoryStatus === 'saving'} onClick={resetDirectory}>{t('resetDirectory')}</button>
+              <button type="button" disabled={!settingsView.writable || !directoryOverridden || directoryStatus === 'saving'} onClick={resetDirectory}>{t('resetDirectory')}</button>
               {directoryStatus === 'saved' ? <span className={css.status}>{t('directorySaved')}</span> : null}
               {directoryStatus === 'error' ? <span className={css.error}>{t('directoryError')}</span> : null}
             </div>

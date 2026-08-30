@@ -37,6 +37,8 @@ config:
 
 默认目录是插件的 `games/`。
 
+浏览器贡献由 Cordis 动态装配，依赖设置、插件配置、Remote、连接、locale 和提供 slots 服务的 UI renderer 客户端行。包必须携带 `lib/client.js`；Host 从 `package.json` 的 `exports["./client"]` 定位该产物。
+
 ## 构建与验证
 
 ```bash

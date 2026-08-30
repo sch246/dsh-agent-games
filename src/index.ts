@@ -108,7 +108,6 @@ export function apply(ctx: Context, config: Config): void {
     connectionCtx.connection.rpc.handle(
       AGENT_GAMES_RPC_CHANNEL,
       createAgentGamesRpcHandler(catalog),
-      { authority: 'loopback' },
     )
   })
   ctx.effect(

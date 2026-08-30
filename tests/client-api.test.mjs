@@ -1,6 +1,13 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { AGENT_GAMES_RPC_CHANNEL, createAgentGamesClient } from '../lib/types/client/api.js'
+import { hasGamesDirOverride } from '../lib/types/client/settings.js'
+
+test('games directory reset follows user-layer presence', () => {
+  assert.equal(hasGamesDirOverride(undefined), false)
+  assert.equal(hasGamesDirOverride({}), false)
+  assert.equal(hasGamesDirOverride({ gamesDir: '/same-as-base' }), true)
+})
 
 test('browser client maps card operations to the generic RPC channel', async () => {
   const calls = []
