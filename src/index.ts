@@ -4,7 +4,7 @@ import { isAbsolute } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import type { Context } from '@deepseek-ai/cordis'
 import type {} from '@deepseek-ai/dsh-client-connection'
-import { installSettingsSection, settingsNamespace } from '@deepseek-ai/dsh-settings'
+import type {} from '@deepseek-ai/dsh-settings'
 import { defineTool } from '@deepseek-ai/dsh-tools'
 import z from '@deepseek-ai/schemastery'
 import { AgentGameCatalog } from './catalog.js'
@@ -13,7 +13,7 @@ import type { CreateGameRequest, UpdateGameRequest } from './types.js'
 
 export const name = '@dsh-external/dsh-agent-games'
 export const inject = ['tools']
-export const AGENT_GAMES_NS = settingsNamespace('agent-games')
+export const AGENT_GAMES_NS = 'agent-games'
 
 const DEFAULT_GAMES_DIR = fileURLToPath(new URL('../games/', import.meta.url))
 
@@ -99,10 +99,12 @@ export function apply(ctx: Context, config: Config): void {
   validateConfig(config)
   const catalog = new AgentGameCatalog(config.gamesDir)
   let source = () => config
-  installSettingsSection(ctx, AGENT_GAMES_NS, Config, config, {
-    validate: validateConfig,
-    setSource: current => { source = current },
-    onChange: () => { catalog.useGamesDir(source().gamesDir) },
+  ctx.inject(['settings'], (settingsCtx) => {
+    settingsCtx.settings.installSection(ctx, AGENT_GAMES_NS, Config, config, {
+      validate: validateConfig,
+      setSource: current => { source = current },
+      onChange: () => { catalog.useGamesDir(source().gamesDir) },
+    })
   })
   ctx.inject(['connection'], (connectionCtx) => {
     connectionCtx.connection.rpc.handle(

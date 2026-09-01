@@ -46,3 +46,10 @@ DSH_CHECKOUT=/path/to/deepseek-harness npm test
 ```
 
 `DSH_CHECKOUT` 必须指向已经安装依赖的 DeepSeek Harness 源码目录。构建脚本只在本仓库生成 `lib/`，并通过本地软链接复用 Harness 的构建工具和 peer dependencies；这些生成物和链接不会提交到 Git。
+
+构建后可通过普通 profile 安装，不需要 `super-injector`：
+
+```bash
+cd /path/to/deepseek-harness
+DSH_HOME=<home> pnpm dsh plugin --profile web add /root/dsh-agent-games
+```

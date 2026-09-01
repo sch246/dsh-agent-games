@@ -22,6 +22,9 @@
     "./package.json": "./package.json"
   },
   "files": [
+    ".intent",
+    "AGENTS.md",
+    "cordis.patch.yml",
     "lib/index.js",
     "lib/client.js",
     "lib/types/**/*.js",
@@ -36,6 +39,9 @@
   "homepage": "https://github.com/sch246/dsh-agent-games#readme",
   "bugs": "https://github.com/sch246/dsh-agent-games/issues",
   "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
     "client": {
       "platform": "web",
       "inject": [
