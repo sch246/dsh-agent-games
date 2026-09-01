@@ -36,10 +36,13 @@ Relevant verification cold-loads the real Plugins page, opens the manager, reads
 - Dependency metadata must not become a runtime load dependency or block editing when another plugin is absent.
 - UI convenience must not require loading every prompt into model context.
 
-## Conditional decisions
+## Target-dependent commitments
 
-- If a target cannot host the manager inside the official Plugins settings page, preserve the compact entry and full editing workflow in a package-owned surface and ask before accepting a visibly different navigation model.
-- Exact spacing, component choice and file serialization may change with the Host, provided the confirmed workflow and existing user files remain intact. A later user correction can lock a concrete presentation detail into STATE.
+- When the Host exposes an official Plugins settings extension, Agent Games contributes its compact entry and manager there. A Host without that concept does not need a recreated imitation of the old Plugins page; the confirmed catalog-management capability uses the target's applicable native surface.
+- When the deployment exposes a plugin inventory, the manager shows dependency status from it. A target without an inventory concept does not gain a package-owned scanner merely to reproduce those badges; dependency metadata remains editable and advisory.
+- When Markdown files remain the deployment's game-resource format, maintenance preserves their content and metadata without conversion. A target using another user-editable resource mechanism must preserve the confirmed catalog and user content, not the old serialization for its own sake.
+
+Exact spacing and component choice are not yet locked behavior. A later user correction can make a concrete presentation detail part of STATE.
 
 ## Non-goals
 
