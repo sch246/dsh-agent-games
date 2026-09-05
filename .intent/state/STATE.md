@@ -1,6 +1,6 @@
 # DSH Agent Games
 
-Status: draft product map for independent Agent Games retained while `super-injector` retires. The current single quick Who Is the Undercover prompt is user-selected. The alpha.2 candidate is installed but not yet accepted through a realization lock.
+Status: draft product map for independent Agent Games retained while `super-injector` retires. The quick Who Is the Undercover prompt is user-selected; additional game prompts are user-authorized. The alpha.2 candidate is installed but not yet accepted through a realization lock.
 
 ## Product direction
 
@@ -10,6 +10,7 @@ Keep reusable game instructions outside ordinary model context, let the model or
 
 - The plugin can be installed and removed through ordinary profile composition without `super-injector`.
 - The shipped catalog contains exactly one Who Is the Undercover entry: `undercover`, displayed as `谁是卧底`. It is the user's current optimized quick mode. Historical `undercover-notool` content is not restored as a second game.
+- Additional user-requested games coexist with `undercover`. The `goofspiel` entry, displayed as `暗拍夺宝`, supplies player rules and hosting instructions for a two-player simultaneous-bid match; game adjudication remains outside the catalog plugin.
 - No game prompt enters normal context merely because the plugin is installed. The model retrieves a game's complete rules only through an explicit catalog operation.
 - The model-facing `agentgame_game` capability lists and reads games and can create, update or remove an entry through id, display name, dependency metadata and Markdown rules without requiring the model to edit front matter directly.
 - Model operations, browser operations and settings use one live catalog authority. A change through one surface becomes visible through the others without maintaining a second browser copy.
@@ -23,7 +24,7 @@ Relevant verification cold-loads the real Plugins page, opens the manager, reads
 
 ## Current alpha.2 realization map
 
-- Preserve the user-owned `games/` worktree before any build or profile operation. The current source of truth contains `undercover.md` only; historical files are not installation inputs.
+- Preserve the user-owned `games/` worktree, including additional game prompts, before any build or profile operation. Historical deleted files are not installation inputs.
 - Build both Host and browser faces against the selected Harness source checkout. The published package must include the Host entry, `lib/client.js`, game files and its Bundle patch.
 - Install the package checkout through `dsh plugin --profile <name> add <checkout>`. Require profile dependency and Bundle membership, restart after membership changes, then confirm exactly one Agent Games Host row and browser boot entry.
 - The configured game directory determines the live content. Compare it with the intended source directory before claiming that the quick prompt was installed.
