@@ -2,7 +2,7 @@
 
 This host contains an embedded intent package at `.intent/`.
 
-- Read `.intent/state/STATE.json`, `.intent/state/STATE.md`, and the selected protocol before changing, installing, maintaining, or uninstalling this package.
+- Start with `.intent/state/STATE.json` and `.intent/state/STATE.md` before changing, installing, maintaining, or uninstalling this package. Read the selected protocol when its semantics, format or bindings change, or when their interpretation is uncertain.
 - Preserve uncommitted files in `games/`; they are user content and are not migration scratch state.
 - Use the installation and maintenance map in `.intent/state/STATE.md` to locate current commands, owned sources, data and verification. Read selected logs for the relevant decision; retained locks are optional recovery evidence.
 - Files outside `.intent/` are implementation evidence and may include user-owned content explicitly preserved by STATE.
