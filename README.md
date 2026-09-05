@@ -12,7 +12,7 @@
 
 工具负责 Markdown front matter，代理无需查看插件源码或文件格式。`requires` 只是提示该游戏通常会组合哪些独立插件，不在这里产生运行时耦合。
 
-共享增量消息由独立的 `@dsh-external/dsh-shared-room` 提供。以《谁是卧底》为例，调用方读取游戏提示词、创建通用房间，再把规则和房间号发给子代理；两个插件互不依赖。
+共享增量消息由独立的 `@dsh-external/dsh-shared-room` 提供。具体游戏是否使用共享房间由其提示词决定；Agent Games 与 shared-room 互不依赖。
 
 ## 游戏
 
@@ -44,17 +44,6 @@ config:
 
 浏览器贡献由 Cordis 动态装配，依赖设置、插件配置、Remote、连接、locale 和提供 slots 服务的 UI renderer 客户端行。包必须携带 `lib/client.js`；Host 从 `package.json` 的 `exports["./client"]` 定位该产物。
 
-## 构建与验证
+## 安装与维护
 
-```bash
-DSH_CHECKOUT=/path/to/deepseek-harness npm test
-```
-
-`DSH_CHECKOUT` 必须指向已经安装依赖的 DeepSeek Harness 源码目录。构建脚本只在本仓库生成 `lib/`，并通过本地软链接复用 Harness 的构建工具和 peer dependencies；这些生成物和链接不会提交到 Git。
-
-构建后可通过普通 profile 安装，不需要 `super-injector`：
-
-```bash
-cd /path/to/deepseek-harness
-DSH_HOME=<home> pnpm dsh plugin --profile web add /root/dsh-agent-games
-```
+构建、profile 安装、升级适配、卸载、数据保留和验证入口见 [STATE 安装维护地图](.intent/state/STATE.md#installation-and-maintenance-map)。STATE 区分用户要求保留的效果与当前实现；历史安装记录不代表当前部署已验证。
